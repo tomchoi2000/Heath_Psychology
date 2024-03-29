@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Factor-H: Health threats severity | Shield Up! Building Immunity, Protecting Futures!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!-- Include Chart.js -->
+    	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<style>
+			canvas {
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+			}
+		</style>
+		<!-- simulate -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		 <style>
+		   .icon {
+		   	margin: 10px;
+		    font-size: 60px;
+		    color: #808080;
+		   }
+		 </style>
+
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="logo"><a href="index.html">Health Psychology <span>Public Campaign</span></a></div>
+				<a href="#menu" class="toggle"><span>Menu</span></a>
+		</header>
+
+		<!-- Nav -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="factor_g.html">Immunization importance</a></li>
+				<li><a href="factor_h.html">Health threats severity</a></li>
+				<li><a href="factor_k.html">Misconceptions of vaccines</a></li>
+			</ul>
+		</nav>
+
+		<!-- Banner -->
+			<section id="banner" data-video="images">
+				<div class="inner">
+					<header class="align-center">
+							<h1>So how effective are vaccinations?</h1>
+							<p> Let’s take a closer look at our most recent outbreak, COVID-19!</p>
+						</header>
+						<p> There are many articles out there that aim to lead the readers astray. <br /> For example, imagine a population of 60 people. 10 out of 60 passed away from the virus, and 50% of those who died were vaccinated. <br /> A news headline may say, <br />“Half of those who died from COVID-19 were vaccinated!” <br />Seems accurate, <a href="#four"> right? </a> </p>	
+						<a href="#one" class="button special scrolly">Wrong!</a>
+				</div>
+			</section>
+
+		<!-- One -->
+		<section id="one" class="wrapper style2">
+			<div class="inner">
+				<div class="box">
+					<div class="content">
+						<header class="align-center">
+							<h2>Visualise the bigger picture:</h2>
+							<p> How many people in total were vaccinated?</p>
+						</header>
+						<hr />
+						<p> Out of the entire population, 50 of them were vaccinated, leaving the other 10 unvaccinated. Now we see that although half of those who died were vaccinated, 90% of the vaccinated population did not die from the virus. On the other hand, only 50% of the unvaccinated did not die from COVID-19. </p>
+						<div class="content align-center">
+							<div id="canvas"></div>
+							<br/>
+							  <p id="info">Imagine we live in a place with a population of 60 people.</p>
+							  <button onclick="simulate()">Simulate</button>
+
+							  <script>
+							    const canvas = document.getElementById('canvas');
+							    const infoText = document.getElementById('info');
+
+							    function generateIcons() {
+							      canvas.innerHTML = '';
+							      for (let i = 0; i < 5; i++) {
+							        for (let j = 0; j < 12; j++) {
+							          canvas.innerHTML += '<i class="icon fas fa-circle"></i>';
+							        }
+							        canvas.innerHTML += '<br>';
+							      }
+							    }
+
+							    let simulationStep = 0;
+
+							    function simulate() {
+							      const icons = canvas.querySelectorAll('.icon');
+							      switch (simulationStep) {
+							        case 0:
+							          icons[1].classList.replace('fa-circle', 'fa-skull');
+							          icons[2].classList.replace('fa-circle', 'fa-skull');
+							          icons[13].classList.replace('fa-circle', 'fa-skull');
+							          icons[14].classList.replace('fa-circle', 'fa-skull');
+							          icons[25].classList.replace('fa-circle', 'fa-skull');
+							          icons[26].classList.replace('fa-circle', 'fa-skull');
+							          icons[37].classList.replace('fa-circle', 'fa-skull');
+							          icons[38].classList.replace('fa-circle', 'fa-skull');
+							          icons[49].classList.replace('fa-circle', 'fa-skull');
+							          icons[50].classList.replace('fa-circle', 'fa-skull');
+							          infoText.textContent = "Then we learn that 10 people died.";
+							          break;
+							        case 1:
+							          icons[1].classList.replace('fa-skull', 'fa-circle-xmark');
+							          icons[2].classList.replace('fa-skull', 'fa-circle-check');
+							          icons[13].classList.replace('fa-skull', 'fa-circle-xmark');
+							          icons[14].classList.replace('fa-skull', 'fa-circle-check');
+							          icons[25].classList.replace('fa-skull', 'fa-circle-xmark');
+							          icons[26].classList.replace('fa-skull', 'fa-circle-check');
+							          icons[37].classList.replace('fa-skull', 'fa-circle-xmark');
+							          icons[38].classList.replace('fa-skull', 'fa-circle-check');
+							          icons[49].classList.replace('fa-skull', 'fa-circle-xmark');
+							          icons[50].classList.replace('fa-skull', 'fa-circle-check');
+							          infoText.textContent = "And we learn that 50% of them were vaccinated. The newspaper may read, “Half of those who died from the virus were vaccinated.” ";
+							          break;
+							        case 2:
+							          for (let i = 0; i < 5; i++) {
+							            icons[i * 12].classList.replace('fa-circle', 'fa-circle-xmark');
+							          }
+							          for (let i = 0; i < 5; i++) {
+							            for (let j = 0; j < 12; j++) {
+							              if (i !== 0 || j !== 0) {
+							                icons[i * 12 + j].classList.replace('fa-circle', 'fa-circle-check');
+							                icons[i * 12 + j].classList.replace('fa-circle-check', 'fa-circle-check');
+							              }
+							            }
+							          }
+							          infoText.textContent = "Now we have all the information we need and can calculate the death rates.";
+							          break;
+							        case 3:
+							          generateIcons();
+							          infoText.textContent = "Imagine we live in a place with a population of 60 people.";
+							          simulationStep = -1;
+							          break;
+							      }
+							      simulationStep++;
+							    }
+
+							    window.addEventListener('load', generateIcons);
+							  </script>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+
+					
+
+		<!-- Four -->
+		<section id="four" class="wrapper style3">
+			<div class="inner">
+				<header class="align-center" id="title1">
+					<h2>United States: COVID-19 weekly death rate by vaccination status, All ages</h2>
+					<p>Death rates are calculated as the number of deaths in each group, divided by the total number of people in this group. This is given per 100,000 people.</p>
+				</header>
+				<header class="align-center" id="title2" style="display:none;">
+					<h2>COVID-19 Cases and Deaths by Vaccination Status in Malaysia</h2>
+					<p>This chart presents the distribution of COVID-19 cases and associated fatalities among unvaccinated, partially vaccinated, and fully vaccinated individuals in Malaysia, highlighting the impact of vaccination on disease outcomes.</p>
+				</header>
+
+				<!-- Stacked Area Chart -->
+				<canvas id="chart1" class="chart" width="800" height="400"></canvas>
+				<canvas id="chart2" class="chart" width="800" height="400" style="display:none;"></canvas>
+				<br/>
+				<div class="select-wrapper">
+		            <select name="chartSelector" id="chartSelector">
+		                <option value="chart1">United States: COVID-19 weekly death rate by vaccination status, All ages</option>
+		                <option value="chart2">COVID-19 Cases and Deaths by Vaccination Status in Malaysia</option>
+		            </select>
+		        </div>
+
+				<header class="align-left" id="note1">
+					<h6></h6>
+					<p>Data source: Centers for Disease Control and Prevention, Vaccine Breakthrough/Surveillance and Analytics Team – <a href="https://ourworldindata.org/grapher/united-states-rates-of-covid-19-deaths-by-vaccination-status">Learn more about this data</a>
+					<br/>Note: The mortality rate for the 'All ages' group is age-standardized to account for the different vaccination rates of older and younger people.
+					OurWorldInData.org/coronavirus | CC BY</p>
+					<hr/>
+					<h3></h3><p>As you can see from this chart, throughout the COVID-19 pandemic, the mortality rate of the unvaccinated in The U.S. remained drastically higher than the vaccinated with or without bivalent booster (Mathieu & Roser, 2024).</p>
+				</header>
+				<header class="align-left" id="note2" style="display:none;">
+					<h6></h6>
+					<p>Open data on COVID-19 in Malaysia – <a href="https://github.com/MoH-Malaysia/covid19-public">Learn more about this data</a></p>
+					<hr/>
+					<h3></h3><p>It was discovered that the total age-standardised mortality rates for the unvaccinated population in Malaysia were 43.2 times higher than the fully vaccinated and 12.5 times higher than the partially vaccinated (Abdul Taib et al., 2022). These numbers display the effectiveness of vaccinations and significance of immunisation.</p>
+				</header>
+
+				<script>
+					// Data for the chart
+					var chart1Data = {
+						labels: ["2021-10-09", "2021-10-16", "2021-10-23", "2021-10-30",
+							    "2021-11-06", "2021-11-13", "2021-11-20", "2021-11-27",
+							    "2021-12-04", "2021-12-11", "2021-12-18", "2021-12-25",
+							    "2022-01-01", "2022-01-08", "2022-01-15", "2022-01-22",
+							    "2022-01-29", "2022-02-05", "2022-02-12", "2022-02-19",
+							    "2022-02-26", "2022-03-05", "2022-03-12", "2022-03-19",
+							    "2022-03-26", "2022-04-02", "2022-04-09", "2022-04-16",
+							    "2022-04-23", "2022-04-30", "2022-05-07", "2022-05-14",
+							    "2022-05-21", "2022-05-28", "2022-06-04", "2022-06-11",
+							    "2022-06-18", "2022-06-25", "2022-07-02", "2022-07-09",
+							    "2022-07-16", "2022-07-23", "2022-07-30", "2022-08-06",
+							    "2022-08-13", "2022-08-20", "2022-08-27", "2022-09-03",
+							    "2022-09-10", "2022-09-17", "2022-09-24", "2022-10-01",
+							    "2022-10-08", "2022-10-15", "2022-10-22", "2022-10-29",
+							    "2022-11-05", "2022-11-12", "2022-11-19", "2022-11-26",
+							    "2022-12-03", "2022-12-10", "2022-12-17", "2022-12-24",
+							    "2022-12-31", "2023-01-07", "2023-01-14", "2023-01-21",
+							    "2023-01-28", "2023-02-04", "2023-02-11", "2023-02-18",
+							    "2023-02-25", "2023-03-04", "2023-03-11", "2023-03-18",
+							    "2023-03-25", "2023-04-01"],
+						datasets: [{
+							label: 'Unvaccinated',
+							data: [
+								    13.38574, 12.27091283, 10.38200367, 10.12846728, 10.83991604, 11.8751285, 14.63132396, 14.11327224, 
+								    18.67857038, 19.46287603, 18.10733621, 18.60998038, 25.6197879, 33.64208052, 32.38818636, 31.38080966, 
+								    28.55026198, 21.21218149, 16.14762132, 10.39420537, 7.132694848, 4.81143697, 2.928442061, 2.13773706, 
+								    1.644908721, 1.16975032, 1.128543944, 1.209556162, 0.9784181552, 1.418653378, 1.476383497, 1.949491601, 
+								    1.983461963, 2.282175364, 2.373638379, 2.242311049, 2.464610563, 2.5493257, 2.922481191, 3.310150696, 
+								    3.594006343, 3.643912788, 3.447268026, 3.637014095, 3.694889254, 3.352101773, 3.055740571, 3.025448618, 
+								    2.792189147, 2.474932443, 2.403897691, 2.506953936, 2.411677854, 2.48484524, 2.455774577, 2.848617898, 
+								    2.852634505, 2.708458054, 2.861901643, 3.243590773, 4.08284629, 4.009556727, 3.831016358, 4.030376945, 
+								    4.381568298, 3.84426138, 3.285818906, 2.32271692, 2.016322529, 2.101307504, 1.671468974, 1.38470512, 
+								    1.598057744, 1.263163303, 1.333243872, 0.9515956608, 0.8403550888, 0.6144106009
+								],
+							backgroundColor: 'rgba(220, 53, 69, 0.5)',
+							borderColor: 'rgba(220, 53, 69, 1)',
+							borderWidth: 1,
+							tension: 0.3
+
+						}, {
+							label: 'Vaccinated with bivalent booster',
+							data: [ , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 0.2141245633, 0.1172221677, 0.1135611428, 0.2163930698, 0.1840752304, 0.2321451816, 0.2006906295, 0.2921853488, 0.3117604887, 0.3730856366, 0.4330030103, 0.3995104063, 0.500149716, 0.533141163, 0.4357500702, 0.3941618249, 0.3264460395, 0.3006302403, 0.3079830219, 0.2604913838, 0.2816948171, 0.3079050283, 0.2258525072, 0.2122205786, 0.1581233979, 0.1743854735, 0.1680557708],
+							backgroundColor: 'rgba(255, 206, 86, 0.5)',
+							borderColor: 'rgba(255, 206, 86, 1)',
+							borderWidth: 1,
+							tension: 0.3
+						},{
+							label: 'Vaccinated without bivalent booster',
+							data: [ 0.8074870294, 0.7796689916, 0.6973216507, 0.679106968, 0.7726872105, 0.8645269422, 0.9638357764, 0.9149663744, 1.064352205, 0.9747970552, 0.9041337777, 1.049041008, 2.310287825, 3.325411278, 3.52751662, 3.223547106, 2.625872598, 1.842654499, 1.249177067, 0.8646223696, 0.5873899199, 0.4102688706, 0.2647179111, 0.2111457692, 0.1322309143, 0.159853165, 0.1528316715, 0.1599147736, 0.2326399784, 0.269160334, 0.3316722092, 0.4354941673, 0.4490630255, 0.4685323609, 0.4856772855, 0.5145764607, 0.5518380937, 0.5257128037, 0.5863333468, 0.6586838394, 0.7287024629, 0.7567384194, 0.6988865864, 0.6819450525, 0.6715185438, 0.6030084834, 0.5883121372, 0.6055694063, 0.5532128419, 0.5059034045, 0.4638049193, 0.4435916212, 0.4791782415, 0.4865564377, 0.5551819525, 0.5905802031, 0.598312396, 0.6224689956, 0.6327520555, 0.7312869589, 0.8843221551, 0.8975223537, 0.8597100364, 0.9281716855, 1.009084224, 0.8671751685, 0.6658607324, 0.5482912259, 0.5028394193, 0.4116749501, 0.4214363723, 0.393067556, 0.3229223932, 0.296250998, 0.2337180214, 0.209200346, 0.1634250411, 0.1389398683],
+							backgroundColor: 'rgba(40, 167, 69, 0.5)',
+							borderColor: 'rgba(40, 167, 69, 1)',
+							borderWidth: 1,
+							tension: 0.3
+						}]
+					};
+
+					var chart2Data = {
+						labels: ["2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11"],
+						datasets: [{
+							label: 'cases_unvaccinated',
+							data: [ 
+								199.2269938, 626.398966, 1584.596457, 2862.567664, 2940.456342, 1522.51731, 1194.786085, 940.6597836, 805.8054592, 3412.09684, 3608.870041, 968.1622248, 272.4960974, 306.9007358, 620.632352, 642.217673, 446.0973836, 510.1301475, 389.9972074
+								],
+							backgroundColor: 'rgba(220, 53, 69, 0.8)',
+							borderColor: 'rgba(220, 153, 169, 1)',
+							borderWidth: 0,
+							order: 6,
+							fill: true,
+							pointStyle: false
+						}, {
+							label: 'cases_partially_vaccinated',
+							data: [ 
+								164.0646584, 392.0418244, 1539.264923, 2889.574006, 2156.099918, 937.44189, 361.7945016, 198.7869648, 156.5040504, 628.0652089, 663.7477811, 133.050931, 29.46780997, 35.66180127, 54.53416077, 63.67268632, 32.88257027, 41.75066013, 40.98691762
+								],
+							backgroundColor: 'rgba(255, 206, 86, 0.8)',
+							borderColor: 'rgba(255, 206, 86, 1)',
+							borderWidth: 0,
+							order: 5,
+							fill: true,
+							pointStyle: false
+						},{
+							label: 'cases_fully_vaccinated',
+							data: [ 
+								134.2803201, 319.1609345, 741.2154318, 1278.331965, 1296.598047, 660.6146921, 517.9862156, 409.3070273, 411.7133622, 2269.60429, 1834.636841, 330.1060864, 91.86449224, 87.34380365, 171.7417652, 182.0514787, 112.8142903, 127.6280842, 112.9583043
+								],
+							backgroundColor: 'rgba(40, 167, 69, 0.8)',
+							borderColor: 'rgba(40, 167, 69, 1)',
+							borderWidth: 0,
+							order: 4,
+							fill: true,
+							pointStyle: false
+						},{
+							label: 'deaths_unvaccinated',
+							data: [ 
+								2.889446594, 11.21825182, 35.10250093, 89.23390893, 154.7587941, 98.80138743, 61.26750395, 47.53280563, 23.33362274, 48.3748599, 99.15107369, 24.72869152, 5.680202103, 3.432260103, 8.003249549, 11.25085372, 8.509966809, 5.341494804, 5.356011996
+								],
+							backgroundColor: 'rgba(0, 0, 0, 1)',
+							borderColor: 'rgba(220, 53, 69, 1)',
+							borderWidth: 3,
+							order: 3,
+							tension: 0.3,
+							pointStyle: false,
+							fill: true
+						},{
+							label: 'deaths_partially_vaccinated',
+							data: [ 
+								4.846725919, 10.67257074, 34.04304395, 40.33927803, 30.86703371, 21.2599263, 14.02790285, 9.845883861, 3.94317683, 10.79347139, 17.97593386, 4.203040407, 1.051155953, 0, 1.773666891, 0.715105301, 0.358127708, 0, 0.35630427
+								],
+							backgroundColor: 'rgba(0, 0, 0, 1)',
+							borderColor: 'rgba(255, 206, 86, 1)',
+							borderWidth: 3,
+							order: 2,
+							tension: 0.3,
+							pointStyle: false,
+							fill: true
+						},{
+							label: 'deaths_fully_vaccinated',
+							data: [ 
+								0, 0.412634074, 5.191476952, 10.28973974, 7.936498636, 5.224737012, 3.623602862, 2.836970068, 1.401312528, 4.832615137, 11.18122322, 2.310253506, 0.640383353, 0.387383213, 1.094769069, 1.011564073, 0.492886117, 0.494110925, 0.669251923
+								],
+							backgroundColor: 'rgba(0, 0, 0, 1)',
+							borderColor: 'rgba(40, 167, 69, 1)',
+							borderWidth: 3,
+							order: 1,
+							tension: 0.3,
+							pointStyle: false,
+							fill: true
+						}]
+					};
+
+					// Options for the chart
+					var options = {
+						scales: {
+							x: {
+								stacked: false,
+							},
+							y: {
+								stacked: false
+							}
+						},
+						plugins: {
+							tooltip: {
+								mode: 'index',
+								intersect: false
+							}
+						}
+					};
+
+					// Create the chart
+					var ctx1 = document.getElementById('chart1').getContext('2d');
+		            var chart1 = new Chart(ctx1, {
+		                type: 'line',
+		                data: chart1Data,
+		                options: options
+		            });
+		            var ctx2 = document.getElementById('chart2').getContext('2d');
+		            var chart2 = new Chart(ctx2, {
+		                type: 'line',
+		                data: chart2Data,
+		                options: options
+		            });
+
+		            // Hide chart 2 initially
+		            $('#chart2').hide();
+
+		            // Toggle chart visibility based on selected option
+		            $('#chartSelector').change(function() {
+		                var selectedChart = $(this).val();
+		                if (selectedChart === 'chart1') {
+		                    $('#chart1').show();
+		                    $('#chart2').hide();
+		                    $('#title1').show();
+		                    $('#title2').hide();
+		                    $('#note1').show();
+		                    $('#note2').hide();
+		                } else if (selectedChart === 'chart2') {
+		                    $('#chart1').hide();
+		                    $('#chart2').show();
+		                    $('#title1').hide();
+		                    $('#title2').show();
+		                    $('#note1').hide();
+		                    $('#note2').show();
+		                }
+		            });
+				</script>
+			</div>
+		</section>
+
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper">
+				<div class="inner">
+					<div class="copyright">
+						&copy; UCSI University - FACULTY OF SOCIAL SCIENCES AND LIBERAL ARTS</br>SP208/BSP1073_Heath Psychology_Group_assignment_Public_Health Campaign_January_To_April_2024
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
